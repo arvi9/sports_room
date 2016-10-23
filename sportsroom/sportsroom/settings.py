@@ -15,7 +15,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATICFILES_DIRS = (
-  os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static'),
 )
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -52,8 +52,8 @@ MIDDLEWARE = [
 ]
 
 CRON_CLASSES = [
-    "equipment.updatefine_cron.MyCronJob",
-    "equipment.resetQueue_cron.MyCronJob",
+    'equipment.cron.UpdateFineCronJob',
+    'equipment.cron.ResetQCronJob',
 ]
 
 ROOT_URLCONF = 'sportsroom.urls'
@@ -61,7 +61,7 @@ ROOT_URLCONF = 'sportsroom.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

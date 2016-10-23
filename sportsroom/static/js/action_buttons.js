@@ -1,3 +1,4 @@
+//TODO: Cleanup and comment
 (function ($) {
 
     function fix_actions() {
