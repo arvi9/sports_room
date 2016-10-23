@@ -26,8 +26,7 @@ class BorrowedItemAdmin(admin.ModelAdmin):
     list_display = ('get_student', 'get_equipment', 'issue_date', 'due_date')
 
     def get_student(self, obj):
-        return obj.student.name
-
+        return obj.student.user.username
     get_student.short_description = "Name"
 
     def get_equipment(self, obj):
@@ -40,8 +39,7 @@ class QueueAdmin(admin.ModelAdmin):
     list_display = ('get_student', 'get_equipment')
 
     def get_student(self, obj):
-        return obj.student.name
-
+        return obj.student.user.username
     get_student.short_description = "Name"
 
     def get_equipment(self, obj):
