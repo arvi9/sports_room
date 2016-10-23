@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'equipment',
     'django.contrib.admin',
+    'django_cron',
 ]
 
 MIDDLEWARE = [
@@ -46,6 +47,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CRON_CLASSES = [
+    "equipment.updatefine_cron.MyCronJob",
+    "equipment.resetQueue_cron.MyCronJob",
 ]
 
 ROOT_URLCONF = 'sportsroom.urls'

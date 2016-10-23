@@ -15,7 +15,6 @@ class Student(models.Model):
 
     def __str__(self):
         return self.user.username
-
     @property
     def username(self):
         return self.user.username
@@ -77,7 +76,7 @@ class Queue(models.Model):
     book_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.student.roll_no
+        return self.student.user.username
 
     class Meta:
         ordering = ['book_date']
