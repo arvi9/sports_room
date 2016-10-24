@@ -43,7 +43,7 @@ class ResetQCronJob(CronJobBase):
     code = 'equipment.reset_q_cron_job'  # a unique code
 
     def do(self):
-        # print( "running reset Queue cron") # do your thing here
+        print( "running reset Queue cron") # do your thing here
         students = Queue.objects.all()
         now = datetime.now(timezone.utc)
         for student in students:
