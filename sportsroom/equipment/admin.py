@@ -19,16 +19,10 @@ class StudentAdmin(admin.ModelAdmin):
     reset_fine.short_description = "Reset fine for selected students"
 
 
-<<<<<<< HEAD
-    def paid(self, request, queryset):
-        queryset.update(n_equipment=0)
-        self.message_user(request, "Did shit successfully marked as published.")
-        #test.short_description = "Test shit"
-=======
+
 @admin.register(Equipment)
 class EquipmentAdmin(admin.ModelAdmin):
     list_display = ('category', 'n_equipment')
->>>>>>> 68eff57e6a7cf17cd325214aa5d50e33ea908bcd
 
     class Media:
         js = ("js/action_buttons.js",)
