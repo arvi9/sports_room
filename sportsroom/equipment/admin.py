@@ -15,7 +15,7 @@ class EquipmentAdmin(admin.ModelAdmin):
     def paid(self, request, queryset):
         queryset.update(n_equipment=0)
         self.message_user(request, "Did shit successfully marked as published.")
-    test.short_description = "Test shit"
+        #test.short_description = "Test shit"
 
     class Media:
         js = ("js/action_buttons.js",)

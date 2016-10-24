@@ -1,12 +1,10 @@
 
 
-
 {% extends "base.html" %}
 {% load i18n %}
 
 {% block header%}
-    <h1>Login</h1>
-
+    <h1>Welcome to IIITB Sports Room</h1>
     <form method="post" action=".">
         {% csrf_token %}
         {{ form.as_p }}
