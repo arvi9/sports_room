@@ -1,11 +1,12 @@
+from decimal import Decimal
+
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from datetime import timedelta
-from django.utils import timezone
-from decimal import Decimal
+from .utility import get_due_date
 
 
 class Student(models.Model):
@@ -15,6 +16,7 @@ class Student(models.Model):
 
     def __str__(self):
         return self.user.username
+
     @property
     def username(self):
         return self.user.username
@@ -39,15 +41,15 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 class Equipment(models.Model):
-    TABLE_TENNIS_RACKET = 'TTR'
-    SHUTTLE_RACKET = 'SHR'
-    CATEGORY_CHOICES = (
-        (TABLE_TENNIS_RACKET, 'TT Racket'),
-        (SHUTTLE_RACKET, 'Shuttle Racket'),
+    table_tennis_racket = 'TTR'
+    shuttle_racket = 'SHR'
+    category_choices = (
+        (table_tennis_racket, 'TT Racket'),
+        (shuttle_racket, 'Shuttle Racket'),
     )
     category = models.CharField(
         max_length=3,
-        choices=CATEGORY_CHOICES
+        choices=category_choices
     )
     n_equipment = models.PositiveIntegerField(default=0)
 
@@ -55,15 +57,11 @@ class Equipment(models.Model):
         return self.category
 
 
-def get_duedate():
-    return timezone.now() + timedelta(days=7)
-
-
 class BorrowedItem(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
     issue_date = models.DateTimeField(default=timezone.now)
-    due_date = models.DateTimeField(default=get_duedate)
+    due_date = models.DateTimeField(default=get_due_date)
     return_date = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
