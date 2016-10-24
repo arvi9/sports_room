@@ -16,8 +16,8 @@ class StudentAdmin(admin.ModelAdmin):
     def reset_fine(self, request, queryset):
         queryset.update(fine=0)
         self.message_user(request, "Fine reset successfully")
-    reset_fine.short_description = "Reset fine for selected students"
 
+    reset_fine.short_description = "Reset fine for selected students"
 
 
 @admin.register(Equipment)
@@ -38,15 +38,18 @@ class BorrowedItemAdmin(admin.ModelAdmin):
 
     def get_student(self, obj):
         return obj.student.user.username
+
     get_student.short_description = "Name"
 
     def get_equipment(self, obj):
         return obj.equipment.category
+
     get_equipment.short_description = "Category"
 
     def fine_paid(self, request, queryset):
         queryset.delete()
         self.message_user(request, "Update done")
+
     fine_paid.short_description = "Fine paid"
 
     def fine_due(self, request, queryset):
@@ -56,6 +59,7 @@ class BorrowedItemAdmin(admin.ModelAdmin):
         #   do something
         queryset.delete()
         self.message_user(request, "Fine added to cumulative fine. Update done")
+
     fine_due.short_description = "Fine pending"
 
 
@@ -69,16 +73,21 @@ class QueueAdmin(admin.ModelAdmin):
 
     def get_student(self, obj):
         return obj.student.user.username
+
     get_student.short_description = "Name"
 
     def get_equipment(self, obj):
         return obj.equipment.category
+
     get_equipment.short_description = "Category"
 
     def approve(self, request, queryset):
         for obj in queryset:
             b = BorrowedItem(student=obj.student, equipment=obj.equipment)
+            obj.equipment.n_equipment -= 1
+            obj.save()
             b.save()
         queryset.delete()
         self.message_user(request, "Request approved")
+
     approve.short_description = "Approve"

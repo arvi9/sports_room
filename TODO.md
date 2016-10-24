@@ -1,5 +1,6 @@
 # TODO
 
+* Add cron to ubuntu cron
 * Add return date when removing from borrowed items
 * Use return date & (issue date and due date) to calculate fine
 * Clean up codebase to include best practices from 2 scoops of Django

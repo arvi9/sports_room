@@ -12,13 +12,13 @@
     <body>
         <header>
             {% block header %}
+                <h1>Sports Room @ IIITB</h1>
                 <nav>
                     <ul>
-                        <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
                         {% if user.is_authenticated %}
-                            <li>{% trans "Logged in" %}: {{ user.username }} </li>
-                            <li>(<a href="{% url 'logout' %}">{% trans "Log out" %}</a></li>
-                            <li></li><a href="{% url 'password_change' %}">{% trans "Change password" %}</a>)</li>
+                            <li>{% trans "Logged in" %}: <h4>{{ user.username }} </h4></li>
+                            <li><a href="{% url 'logout' %}">{% trans "Log out" %}</a></li>
+                            <li><a href="{% url 'password_change' %}">{% trans "Change password" %}</a></li>
                         {% else %}
                             <li><a href="{% url 'login' %}">{% trans "Log in" %}</a></li>
                         {% endif %}
