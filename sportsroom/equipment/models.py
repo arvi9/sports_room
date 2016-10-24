@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from .utility import get_due_date
+from .utility import get_due_date, category_choices
 
 
 class Student(models.Model):
@@ -41,12 +41,6 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 class Equipment(models.Model):
-    table_tennis_racket = 'TTR'
-    shuttle_racket = 'SHR'
-    category_choices = (
-        (table_tennis_racket, 'TT Racket'),
-        (shuttle_racket, 'Shuttle Racket'),
-    )
     category = models.CharField(
         max_length=3,
         choices=category_choices

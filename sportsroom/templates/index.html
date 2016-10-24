@@ -1,6 +1,32 @@
+
+
+
 {% extends "base.html" %}
 {% load i18n %}
 
 {% block content %}
-Index page
+<div >
+    <h1>Welcome to IIITB Sports Room</h1>
+    <h3>Fine : </h3>
+</div>
+
+ <table style="width:100%">
+  <tr>
+    <th>Equipment Name</th>
+    <th>Number of equipments left</th>
+    <th></th>
+  </tr>
+{% for item in all_equipments %}
+  <tr align="center">
+    <td>item.category</td>
+    <td>item.n_equipment</td>
+    <td> <button type="button">BOOK</button> </td>
+  </tr>
+
+</table>
+
+
+
+
+
 {% endblock %}
