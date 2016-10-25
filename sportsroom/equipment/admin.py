@@ -47,6 +47,10 @@ class BorrowedItemAdmin(admin.ModelAdmin):
     get_equipment.short_description = "Category"
 
     def fine_paid(self, request, queryset):
+        for obj in queryset:
+            equipment = obj.equipment
+            equipment.n_equipment += 1
+            equipment.save()
         queryset.delete()
         self.message_user(request, "Update done")
 
@@ -55,8 +59,10 @@ class BorrowedItemAdmin(admin.ModelAdmin):
     def fine_due(self, request, queryset):
         # TODO
         # fine update logic
-        # for obj in queryset:
-        #   do something
+        for obj in queryset:
+            equipment = obj.equipment
+            equipment.n_equipment += 1
+            equipment.save()
         queryset.delete()
         self.message_user(request, "Fine added to cumulative fine. Update done")
 
@@ -84,8 +90,9 @@ class QueueAdmin(admin.ModelAdmin):
     def approve(self, request, queryset):
         for obj in queryset:
             b = BorrowedItem(student=obj.student, equipment=obj.equipment)
-            obj.equipment.n_equipment -= 1
-            obj.save()
+            equipment = obj.equipment
+            equipment.n_equipment -= 1
+            equipment.save()
             b.save()
         queryset.delete()
         self.message_user(request, "Request approved")
