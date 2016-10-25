@@ -1,6 +1,7 @@
 # TODO
 
 * Add cron to ubuntu cron
+* Dummy commit
 * Add return date when removing from borrowed items
 * Reduce equipment count
 * Use return date & (issue date and due date) to calculate fine
