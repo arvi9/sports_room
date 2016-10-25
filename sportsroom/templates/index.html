@@ -4,22 +4,30 @@
 {% block content %}
 
     <div>
-        <h5>Fine :  {{ user_fine }} </h5>
+        <h5>Fine : {{ user_fine }} </h5>
     </div>
     <br/>
 
+    <h5>Available Equipments:</h5>
     <form action="." method="post">
         {% csrf_token %}
-        {% for equipment in all_equipments %}
+        {% for equipment in object_list %}
             <input type="radio" id="equipment{{ forloop.counter }}" name="equipment" value="{{ equipment.id }}">
             <label for="equipment{{ forloop.counter }}">
-                {{ equipment.category }}
-                ({{ equipment.n_equipment }})
+                <strong>{{ equipment.get_category_display }} </strong>
+                ( {{ equipment.n_equipment }} )
             </label>
+            <br/>
 
         {% endfor %}
         <input type="submit" value="Book">
     </form>
+    <br/>
+    {% if success_q %}
+        <h5>Equipment successfully booked. Please collect it from the sports room</h5>
+    {% endif %}
+    <br/>
+
 
 
 

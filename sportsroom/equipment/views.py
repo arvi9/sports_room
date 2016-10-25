@@ -10,6 +10,7 @@ class IndexView(LoginRequiredMixin, ListView):
     context_object_name = 'all_equipments'
     login_url = '/login/'
     model = models.Equipment
+    added_Q = False
 
     def post(self, request, *args, **kwargs):
         equipment_id = request.POST.get('equipment')
@@ -18,12 +19,15 @@ class IndexView(LoginRequiredMixin, ListView):
         entry = models.Queue(student=student, equipment=equipment)
         entry.save()
         print(">>Q entry made")
+        self.added_Q = True
         return super(IndexView, self).get(self, request, args, kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         user_fine = models.Student.objects.get(user__username=self.request.user).fine
         extra_context = {'user_fine': user_fine}
+        if self.added_Q:
+            extra_context['success_q'] = True
         context.update(extra_context)
         return context
 
