@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import (
-    Student, Equipment, BorrowedItem, Queue
+    Student, Equipment, BorrowedItem, Queue, SportsRoomConstants
 )
 
 
@@ -98,3 +98,9 @@ class QueueAdmin(admin.ModelAdmin):
         self.message_user(request, "Request approved")
 
     approve.short_description = "Approve"
+
+
+@admin.register(SportsRoomConstants)
+class SportsRoomConstantsAdmin(admin.ModelAdmin):
+    list_display = ('key', 'value')
+

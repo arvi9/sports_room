@@ -11,6 +11,10 @@ class StudentCreationForm(UserCreationForm):
         model = User
         fields = ('username', 'email', 'password1', 'password2', 'phone_number')
 
+#    def clean_email(self):
+#        data = self.cleaned_data['email']
+#        if User.objects.
+
     def save(self, commit=True):
         user = super(StudentCreationForm, self).save(commit=False)
         user.email = self.cleaned_data['email']

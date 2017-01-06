@@ -72,3 +72,11 @@ class Queue(models.Model):
 
     class Meta:
         ordering = ['book_date']
+
+
+class SportsRoomConstants(models.Model):
+    key = models.CharField(max_length=50, unique=True)
+    value = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.key

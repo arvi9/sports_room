@@ -3,8 +3,7 @@ from datetime import datetime, timezone
 from django.core.mail import send_mail
 from django_cron import CronJobBase, Schedule
 
-from .models import BorrowedItem, Student, Queue
-
+from .models import BorrowedItem, Student, Queue, SportsRoomConstants
 
 class UpdateFineCronJob(CronJobBase):
     RUN_EVERY_MINS = 120  # every 2 hours
@@ -15,6 +14,7 @@ class UpdateFineCronJob(CronJobBase):
     def do(self):
         print("running update cron")  # do your thing here
         items = BorrowedItem.objects.all()
+        fine = int(SportsRoomConstants.objects.get(key="fine"))
 
         for item in items:
             diff = item.return_date - item.due_date
@@ -22,15 +22,16 @@ class UpdateFineCronJob(CronJobBase):
             #TODO: Extract calculate_fine logic
             if diff.days > 0:
                 s = Student.objects.get(id=item.student.id)
-                s.fine += 10
+                s.fine += fine
                 email = s.user.email
+                email_content = 'You have a fine of Rs.' + s.fine + ' due! Make sure you pay it as soon as possible.'
                 s.save()
 
                 print(email)
                 # TODO: Cleanup
                 send_mail(
                     'Fine Due',
-                    'You have some fine due! Make sure you pay it as soon as possible.',
+                    email_content,
                     to=[email],
                     fail_silently=False,
                 )
