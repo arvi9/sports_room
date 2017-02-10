@@ -1,5 +1,6 @@
 from django.conf.urls import url, include
 from django.contrib.auth.views import login
+from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
@@ -8,4 +9,4 @@ urlpatterns = [
     url(r'^register$', views.CreateStudentView.as_view(), name='register'),
     #url(r'^login$', views.student_login, name='login'),
     url(r'^', include('django.contrib.auth.urls')),
-]
+] + static('/', document_root='static/')

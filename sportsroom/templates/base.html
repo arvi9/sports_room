@@ -3,38 +3,67 @@
 <html lang="en">
 
     <head>
-        <title>{% block title %}User test{% endblock %}</title>
+        <title>{% block title %}IIITB Sports Room{% endblock %}</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="http://writ.cmcenroe.me/1.0.4/writ.min.css">
+        <link rel="stylesheet" href="/css/login.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+        <link href="/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="/css/material-kit.css" rel="stylesheet"/>
+        <link href="/css/demo.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="/css/bootstrap-select.min.css" media="screen" title="no title">
     </head>
 
-    <body>
+    <body class="signup-page" background = "/img/city.jpg">
+
         <header>
-            {% block header %}
-                <h1>Sports Room @ IIITB</h1>
-                <nav>
-                    <ul>
-                        {% if user.is_authenticated %}
-                            <li>{% trans "Logged in" %}: <h4>{{ user.username }} </h4></li>
-                            <li><a href="{% url 'logout' %}">{% trans "Log out" %}</a></li>
-                            <li><a href="{% url 'password_change' %}">{% trans "Change password" %}</a></li>
+                {% block header %}
+                <nav class="navbar navbar-fixed-top navbar-color-on-scroll navbar-transparent">
+                  <div class="container">
+                    <div class="navbar-header">
+                      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                      </button>
+                      <a class="navbar-brand" href="<%= root_path %>"><font color = "black"><b> IIIT Bangalore Sports Room</b></font></a>
+                    </div>
+                      <div class="collapse navbar-collapse" id="navigation-example">
+                        <ul class="nav navbar-nav navbar-right">
+                          {% if user.is_authenticated %}
+                            <li class="dropdown">{% trans "Logged in" %}: <a href="#" class="dropdown-toggle btn btn-raised btn-primary btn-round" data-toggle="dropdown" aria-expanded="false">{{ user.username }} </a>
+                            <b class="caret"></b>
+                            <div class="ripple-container"></div>
+                              <ul class="dropdown-menu dropdown-menu-right">
+                                <li class="dropdown-header">Profile Options</li>
+                                <li> <a href="{% url 'logout' %}">{% trans "Log out" %}</a></li>
+                                <li class="divider"> </li>
+                                <li><a href="{% url 'password_change' %}">{% trans "Change password" %}</a></li>
+                              </ul>
+                            </li>
                         {% else %}
-                            <li><a href="{% url 'login' %}">{% trans "Log in" %}</a></li>
+                            <li><a class="btn btn-raised btn-round btn-info" href="{% url 'login' %}">{% trans "Log in" %}</a></li>
                         {% endif %}
                     </ul>
                     <hr/>
                 </nav>
+
             {% endblock %}
         </header>
-        <main>
+
+
             {% block content %}{% endblock %}
-        </main>
+
         <footer>
             {% block footer %}
                 <hr/>
             {% endblock %}
         </footer>
+
     </body>
 
 </html>

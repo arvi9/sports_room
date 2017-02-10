@@ -10,6 +10,14 @@ class StudentCreationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2', 'phone_number')
+    def __init__(self, *args, **kwargs):
+        super(StudentCreationForm, self).__init__(*args, **kwargs)
+        self.fields['phone_number'].widget.attrs.update({'class' : 'form-control'})
+        self.fields['username'].widget.attrs.update({'class' : 'form-control'})
+        self.fields['email'].widget.attrs.update({'class' : 'form-control'})
+        self.fields['password1'].widget.attrs.update({'class' : 'form-control'})
+        self.fields['password2'].widget.attrs.update({'class' : 'form-control'})
+
 
 #    def clean_email(self):
 #        data = self.cleaned_data['email']
