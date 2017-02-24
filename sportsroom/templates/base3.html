@@ -32,17 +32,16 @@
 								<div class="collapse navbar-collapse" id="navigation-example">
 									<ul class="nav navbar-nav navbar-right">
 										{% if user.is_authenticated %}
-											<li class="dropdown">{% trans "Logged in" %}: <div class="dropdown-toggle btn btn-raised btn-primary btn-round" data-toggle="dropdown" aria-expanded="false">{{ user.username }} </div>
-													<ul>
-													<li> <a class="btn btn-raised btn-round btn-info" href="{% url 'logout' %}">{% trans "Log out" %}</a></li>
-													<li><a class="btn btn-raised btn-round btn-info" href="{% url 'password_change' %}">{% trans "Change password" %}</a></li>
-												</ul>
-											</li>
+											<li class="dropdown">{% trans "Logged in" %}: <div class="dropdown-toggle btn btn-raised btn-primary btn-round" data-toggle="dropdown" aria-expanded="false">{{ user.username }} </li></div><br>
+
+													<a style="float:right" class="btn btn-raised btn-round btn-info" href="{% url 'logout' %}">{% trans "Log out" %}</a>
+													<a style="float:right" class="btn btn-raised btn-round btn-info" href="{% url 'password_change' %}">{% trans "Change password" %}</a>
+
 									{% else %}
 											<li><a class="btn btn-raised btn-round btn-info" href="{% url 'login' %}">{% trans "Log in" %}</a></li>
 									{% endif %}
 							</ul>
-							<hr/>
+							
 					</nav>
 
 			{% endblock %}
