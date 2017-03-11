@@ -15,9 +15,19 @@
         <link href="/css/material-kit.css" rel="stylesheet"/>
         <link href="/css/demo.css" rel="stylesheet"/>
         <link rel="stylesheet" href="/css/bootstrap-select.min.css" media="screen" title="no title">
-    </head>
+        <style>
+        { margin: 0; padding: 0; }
+        html, body{
+        background: url('/img/4.jpg') no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+      </style>
+   </head>
 
-    <body class="signup-page" background = "/img/city.jpg">
+    <body class="signup-page">
 
         <header>
                 {% block header %}
@@ -30,7 +40,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                       </button>
-                      <a class="navbar-brand" href="<%= root_path %>"><font color = "black"><b> IIIT Bangalore Sports Room</b></font></a>
+                      <a class="navbar-brand" href="<%= root_path %>"><font color = "white"><b> IIIT Bangalore Sports Room</b></font></a>
                     </div>
                       <div class="collapse navbar-collapse" id="navigation-example">
                         <ul class="nav navbar-nav navbar-right">
